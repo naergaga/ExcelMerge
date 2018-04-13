@@ -1,5 +1,7 @@
-﻿using System;
+using ExcelMerge.Provider;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,20 @@ namespace ExcelMerge
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var dir = this.TextBox1.Text;
+            var dp = new DataProvider();
+            var list = dp.GetList(dir);
+            var book = dp.Merge(list);
+            dp.Export(book, $"test001.xlsx");
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory);
         }
     }
 }
